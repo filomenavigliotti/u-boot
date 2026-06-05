@@ -48,6 +48,11 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential bison flex libssl-dev bc
+        
+        # FIX: Diciamo al compilatore moderno di accettare il codice legacy
+        export HOSTCFLAGS="-fcommon"
+        export CFLAGS="-fcommon"
+        
         make sandbox_defconfig
         make -j$(nproc)
 
